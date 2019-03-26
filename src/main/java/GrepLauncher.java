@@ -4,16 +4,17 @@ import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class GrepLauncher {
     @Option(name = "-r", usage = "Regex")
-    private boolean regex;
+    private boolean r;
 
     @Option(name = "-v", usage = "Inverts filter condition")
-    private boolean invert;
+    private boolean v;
 
     @Option(name = "-i", usage = "Ignore word case")
-    private boolean ignor;
+    private boolean i;
 
     @Argument(required = true, usage = "Search word")
     private String word;

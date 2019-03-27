@@ -6,44 +6,35 @@ import java.util.regex.Pattern;
 
 public class Grep{
 
-    /*private String word, inputName;
-    private boolean ignore;
-
-    public Grep(String regex, String inputFile, boolean ignoreWordCase) {
-        word = regex;
-        inputName = inputFile;
-        ignore = ignoreWordCase;
-    }
-
-    public List<String> r(String word) throws IOException {
-        return finder(word, false);
-    }
-
-    public List<String> v(String word) throws IOException {
-        return finder(word, true);
-    }*/
-
-    public List<String> finder(boolean r, boolean v, boolean i, String word, String input) throws IOException {
+    public static void finder(boolean r, boolean v, boolean i, String word, String input) throws IOException {
         BufferedReader buffer = new BufferedReader(new FileReader(new File(input)));
         String line = buffer.readLine();
         List<String> answer = new ArrayList<String>();
         Pattern pattern;
         String regex;
+        boolean trueOrFalse;
         while (line != null) {
-            if (r == true) {
-                regex = (".*" + Pattern.quote(word) + ".*");
+            if (r) {
+                regex = (".*" + word + ".*");
             } else {
                 regex = word;
             }
-            if (i == true) {
+            if (i) {
                 pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
             } else {
                 pattern = Pattern.compile(regex);
             }
             Matcher m = pattern.matcher(line);
-            if (m.matches()) {
+            trueOrFalse = m.find();
+            if (v) {
+                trueOrFalse = !trueOrFalse;
             }
+            if (trueOrFalse) {
+                answer.add(line);
+            }
+            line = buffer.readLine();
         }
-
+        buffer.close();
+        for (String str : answer) System.out.println(str);
     }
 }

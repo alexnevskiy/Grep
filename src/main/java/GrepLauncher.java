@@ -4,7 +4,6 @@ import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 
 import java.io.IOException;
-import java.util.regex.Pattern;
 
 public class GrepLauncher {
     @Option(name = "-r", usage = "Regex")
@@ -36,6 +35,10 @@ public class GrepLauncher {
             parser.printUsage(System.err);
             return;
         }
-
+        try {
+            Grep.finder(r, v, i, word, input);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

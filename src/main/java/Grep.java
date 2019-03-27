@@ -15,9 +15,9 @@ public class Grep{
         boolean trueOrFalse;
         while (line != null) {
             if (r) {
-                regex = (".*" + word + ".*");
-            } else {
                 regex = word;
+            } else {
+                regex = ".*" + word + ".*";
             }
             if (i) {
                 pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
@@ -25,7 +25,7 @@ public class Grep{
                 pattern = Pattern.compile(regex);
             }
             Matcher m = pattern.matcher(line);
-            trueOrFalse = m.find();
+            trueOrFalse = m.matches();
             if (v) {
                 trueOrFalse = !trueOrFalse;
             }

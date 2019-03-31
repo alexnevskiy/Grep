@@ -36,7 +36,7 @@ public class GrepLauncher {
             return;
         }
         try {
-            Grep.finder(r, v, i, word, input);
+            for (String str : Grep.finder(r, v, i, word, input)) System.out.println(str);
         } catch (IOException e) {
             e.printStackTrace();
         }

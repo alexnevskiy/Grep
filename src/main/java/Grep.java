@@ -13,17 +13,17 @@ public class Grep{
         Pattern pattern;
         String regex;
         boolean trueOrFalse;
+        if (r) {  //  Соответствие флагу -r
+            regex = word;
+        } else {
+            regex = ".*" + Pattern.quote(word) + ".*";
+        }
+        if (i) {  //  Соответствие флагу -i
+            pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+        } else {
+            pattern = Pattern.compile(regex);
+        }
         while (line != null) {
-            if (r) {  //  Соответствие флагу -r
-                regex = word;
-            } else {
-                regex = ".*" + word + ".*";
-            }
-            if (i) {  //  Соответствие флагу -i
-                pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-            } else {
-                pattern = Pattern.compile(regex);
-            }
             Matcher m = pattern.matcher(line);
             trueOrFalse = m.matches();
             if (v) {  //  Соответствие флагу -v
